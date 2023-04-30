@@ -63,7 +63,7 @@
                         speak(result.data.text, "en-US")
                     }
                 });
-            }, 1500);
+            }, 1000);
         })
         .catch(function(e){
             document.querySelector('#result').textContent = JSON.stringify(e);
