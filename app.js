@@ -50,7 +50,7 @@
                     'eng',
                     { 
                         logger: function(e) {
-                            document.querySelector('#progress').textContent = e.status;
+                            //document.querySelector('#progress').textContent = e.status;
                             isRecognizing = false;
                         }
                     }
@@ -58,7 +58,7 @@
                 .then(function(result){
                     document.querySelector('#result').textContent = result.data.text;
                 });
-            }, 500);
+            }, 1000);
         })
         .catch(function(e){
             document.querySelector('#result').textContent = JSON.stringify(e);
