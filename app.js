@@ -50,7 +50,7 @@
                     'eng',
                     { 
                         tessedit_pageseg_mode: "RAW_LINE",
-                        tessedit_char_whitelist: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+                        //tessedit_char_whitelist: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.!? ",
                         logger: function(e) {
                             //document.querySelector('#progress').textContent = e.status;
                             isRecognizing = false;
