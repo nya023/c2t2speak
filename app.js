@@ -15,6 +15,7 @@
         .then(function(stream){
             video.srcObject = stream;
             video.play();
+            var isRecognizing = false;
             setInterval(function(){
                 canvas.width = video.videoWidth;
                 canvas.height = video.videoHeight;
@@ -36,28 +37,24 @@
                 );
                 ctx.stroke();
 
-                var isRecognizing = false;
-                setInterval(function(){
-                    buf.width = box.w;
-                    buf.height = box.h;
-    
-                    buf.getContext('2d').drawImage(canvas, box.x, box.y, box.w, box.h, 0, 0, box.w, box.h);
+                buf.width = box.w;
+                buf.height = box.h;
 
-                    if (isRecognizing) return;
-                    isRecognizing = true;
+                buf.getContext('2d').drawImage(canvas, box.x, box.y, box.w, box.h, 0, 0, box.w, box.h);
 
-                    Tesseract.recognize(
-                        buf,
-                        'eng',
-                        { 
-                            logger: function(e) {
-                                document.querySelector('#progress').textContent = e.status;
-                                isRecognizing = false;
-                            }
+                if (isRecognizing) return;
+                isRecognizing = true;
+
+                Tesseract.recognize(
+                    buf,
+                    'eng',
+                    { 
+                        logger: function(e) {
+                            document.querySelector('#progress').textContent = e.status;
+                            isRecognizing = false;
                         }
-                    )
-    
-                }, 300);
+                    }
+                )
             }, 500);
         })
         .catch(function(e){
