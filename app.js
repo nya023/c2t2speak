@@ -35,7 +35,7 @@
                 buf.width = box.w;
                 buf.height = box.h;
                 buf.getContext('2d').drawImage(canvas, box.x, box.y, box.w, box.h, 0, 0, box.w, box.h);
-            }, 200);
+            }, 500);
         })
         .catch(function(e){
             document.querySelector('#result').textContent = JSON.stringify(e);
