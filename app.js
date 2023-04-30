@@ -59,7 +59,7 @@
                 )
                 .then(function(result){
                     document.querySelector('#result').textContent = result.data.text + "(" +  result.data.confidence + ")";
-                    if( result.data.text.trim().length > 2 && result.data.confidence > 50){
+                    if( result.data.text.trim().length > 2 && result.data.confidence > 60){
                         speak(result.data.text, "en-US")
                     }
                 });
