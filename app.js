@@ -3,13 +3,21 @@ const startButton = document.getElementById("start");
 const stopButton = document.getElementById("stop");
 
 async function startCamera() {
-  try {
-    const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-    video.srcObject = stream;
-  } catch (error) {
-    console.error("Error accessing camera:", error);
+    try {
+      const constraints = {
+        audio: false,
+        video: {
+          facingMode: "environment" // これを追加
+        }
+      };
+  
+      const stream = await navigator.mediaDevices.getUserMedia(constraints);
+      video.srcObject = stream;
+    } catch (error) {
+      console.error("Error starting camera:", error);
+    }
   }
-}
+  
 
 function stopCamera() {
   const stream = video.srcObject;
