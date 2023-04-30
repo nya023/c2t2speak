@@ -35,9 +35,29 @@
                     box.x, box.y, box.w, box.h
                 );
                 ctx.stroke();
-                buf.width = box.w;
-                buf.height = box.h;
-                buf.getContext('2d').drawImage(canvas, box.x, box.y, box.w, box.h, 0, 0, box.w, box.h);
+
+                var isRecognizing = false;
+                setInterval(function(){
+                    buf.width = box.w;
+                    buf.height = box.h;
+    
+                    buf.getContext('2d').drawImage(canvas, box.x, box.y, box.w, box.h, 0, 0, box.w, box.h);
+
+                    if (isRecognizing) return;
+                    isRecognizing = true;
+
+                    Tesseract.recognize(
+                        buf,
+                        'eng',
+                        { 
+                            logger: function(e) {
+                                document.querySelector('#progress').textContent = e.status;
+                                isRecognizing = false;
+                            }
+                        }
+                    )
+    
+                });
             }, 500);
         })
         .catch(function(e){
