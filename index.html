@@ -1,22 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Real-time Translation</title>
-  <link rel="stylesheet" href="style.css">
-<!-- v4 -->
-<script src='https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js'></script>
-</head>
-<body>
+        <script src="https://unpkg.com/tesseract.js@v3.0.3/dist/tesseract.min.js"></script>
+        <script src="app.js"></script>
+        <link rel="stylesheet" href="app.css">
+    </head>
 
-    <video id="camera" autoplay></video>
-    <button id="start">Start Camera</button>
-    <button id="stop">Stop Camera</button>
-    <div id="translation-result">Translation result will be displayed here</div>
-    <button id="speak">Read Aloud</button>
-    
+    <img id="target" src="https://tesseract.projectnaptha.com/img/eng_bw.png">
+    <p id="progress"></p>
+    <canvas id="canvas"></canvas>
+    <p id="result"></p>
 
-  <script src="app.js"></script>
-</body>
 </html>
