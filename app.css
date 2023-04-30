@@ -7,3 +7,56 @@
         width: 100%;
         height: auto;
     }
+
+    .toggle-button-004 {
+        display: flex;
+        align-items: center;
+        position: relative;
+        width: 100px;
+        height: 50px;
+        border-radius: 50px;
+        box-sizing: content-box;
+        background-color: #ff8d8d33;
+        cursor: pointer;
+        transition: background-color .4s;
+    }
+    
+    .toggle-button-004:has(:checked) {
+        background-color: #75bbff33;
+    }
+    
+    .toggle-button-004::before {
+        position: absolute;
+        left: 5px;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background-color: #ff8d8d;
+        content: '';
+        transition: left .4s;
+    }
+    
+    .toggle-button-004:has(:checked)::before {
+        left: 50px;
+        background-color: #75bbff;
+    }
+    
+    .toggle-button-004::after {
+        position: absolute;
+        left: 26px;
+        transform: translateX(-50%);
+        color: #fff;
+        font-weight: 600;
+        font-size: .9em;
+        content: 'OFF';
+        transition: left .4s;
+    }
+    
+    .toggle-button-004:has(:checked)::after {
+        left: 71px;
+        content: 'On';
+    }
+    
+    .toggle-button-004 input {
+        display: none;
+    }
