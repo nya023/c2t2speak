@@ -5,7 +5,7 @@
         video.playsInline = true;
         var canvas = document.querySelector('#canvas');
         var buf = document.createElement('canvas');
-        document.body.append(buf);
+        //document.body.append(buf);
         navigator.mediaDevices.getUserMedia({
             video: {
                 facingMode: 'environment'
@@ -23,8 +23,8 @@
                 ctx.drawImage(video, 0, 0, video.videoWidth, video.videoHeight, 0, 0, canvas.width, canvas.height);
     
                 var box = {
-                    x: 50,
-                    h: 100
+                    x: 100,
+                    h: 200
                 };
                 box.y = (canvas.height - box.h) / 2;
                 box.w = (canvas.width - box.x * 2);
