@@ -23,8 +23,8 @@
                 ctx.drawImage(video, 0, 0, video.videoWidth, video.videoHeight, 0, 0, canvas.width, canvas.height);
     
                 var box = {
-                    x: 100,
-                    h: 200
+                    x: 50,
+                    h: 100
                 };
                 box.y = (canvas.height - box.h) / 2;
                 box.w = (canvas.width - box.x * 2);
@@ -49,6 +49,8 @@
                     buf,
                     'eng',
                     { 
+                        tessedit_pageseg_mode: "RAW_LINE",
+                        tessedit_char_whitelist: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
                         logger: function(e) {
                             //document.querySelector('#progress').textContent = e.status;
                             isRecognizing = false;
@@ -57,11 +59,25 @@
                 )
                 .then(function(result){
                     document.querySelector('#result').textContent = result.data.text;
+                    if( result.data.text.trim().length > 2 && result.data.confidence > 70){
+                        speak(result.data.text, "en-US")
+                    }
                 });
-            }, 1000);
+            }, 2000);
         })
         .catch(function(e){
             document.querySelector('#result').textContent = JSON.stringify(e);
         });
     };
 
+    function speak(text, lang) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = lang;
+      
+        // 音声合成の設定（オプション）
+        utterance.rate = 1; // 読み上げ速度（0.1から10まで）
+        utterance.volume = 1; // 音量（0から1まで）
+        utterance.pitch = 1; // 音程（0から2まで）
+      
+        speechSynthesis.speak(utterance);
+    }
