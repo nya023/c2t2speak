@@ -59,11 +59,11 @@
                 )
                 .then(function(result){
                     document.querySelector('#result').textContent = result.data.text + "(" +  result.data.confidence + ")";
-                    if( result.data.text.trim().length > 2 && result.data.confidence > 70){
+                    if( result.data.text.trim().length > 2 && result.data.confidence > 50){
                         speak(result.data.text, "en-US")
                     }
                 });
-            }, 1000);
+            }, 500);
         })
         .catch(function(e){
             document.querySelector('#result').textContent = JSON.stringify(e);
