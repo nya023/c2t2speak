@@ -25,7 +25,7 @@ async function recognizeTextFromImage(image) {
 }
 
 async function translateText(text, targetLanguage) {
-    const response = await fetch("YOUR_API_ENDPOINT_URL", {
+    const response = await fetch("https://cam2trans2speak-i3k0l0v6c-nya023.vercel.app/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
