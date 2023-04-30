@@ -55,6 +55,9 @@
                         }
                     }
                 )
+                .then(function(result){
+                    document.querySelector('#result').textContent = result.data.text;
+                });
             }, 500);
         })
         .catch(function(e){
