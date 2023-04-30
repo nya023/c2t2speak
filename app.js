@@ -1,5 +1,8 @@
     window.onload = function(){
         var video = document.createElement('video');
+        video.autoplay = true;
+        video.muted = true;
+        video.playsInline = true;
         var canvas = document.querySelector('#canvas');
         var buf = document.createElement('canvas');
         document.body.append(buf);
