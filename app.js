@@ -5,7 +5,7 @@
         video.playsInline = true;
         var canvas = document.querySelector('#canvas');
         var buf = document.createElement('canvas');
-        //document.body.append(buf);
+        document.body.append(buf);
         navigator.mediaDevices.getUserMedia({
             video: {
                 facingMode: 'environment'
@@ -40,7 +40,21 @@
                 buf.width = box.w;
                 buf.height = box.h;
 
-                buf.getContext('2d').drawImage(canvas, box.x, box.y, box.w, box.h, 0, 0, box.w, box.h);
+                //buf.getContext('2d').drawImage(canvas, box.x, box.y, box.w, box.h, 0, 0, box.w, box.h);
+                const bufCtx = buf.getContext('2d');
+                bufCtx.drawImage(canvas, box.x, box.y, box.w, box.h, 0, 0, box.w, box.h);
+    
+                // グレースケール化
+                const imageData = bufCtx.getImageData(0, 0, buf.width, buf.height);
+                const data = imageData.data;
+                for (let i = 0; i < data.length; i += 4) {
+                    const grayscale = data[i] * 0.299 + data[i + 1] * 0.587 + data[i + 2] * 0.114;
+                    data[i] = grayscale;
+                    data[i + 1] = grayscale;
+                    data[i + 2] = grayscale;
+                }
+                bufCtx.putImageData(imageData, 0, 0);
+
 
                 if (isRecognizing) return;
                 isRecognizing = true;
@@ -50,7 +64,7 @@
                     'eng',
                     { 
                         tessedit_pageseg_mode: "RAW_LINE",
-                        //tessedit_char_whitelist: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.!? ",
+                        tessedit_char_whitelist: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.!? ",
                         logger: function(e) {
                             //document.querySelector('#progress').textContent = e.status;
                             isRecognizing = false;
