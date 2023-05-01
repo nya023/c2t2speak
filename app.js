@@ -72,9 +72,12 @@
                     }
                 )
                 .then(function(result){
-                    document.querySelector('#result').textContent = result.data.text + "(" +  result.data.confidence + ")";
-                    if( result.data.text.trim().length > 2 && result.data.confidence > 60){
-                        speak(result.data.text, "en-US")
+                    // フィルタリング: アルファベット, ピリオド, 感嘆符, 疑問符, スペースのみを含む
+                    const filteredText = result.data.text.replace(/[^A-Za-z.!? ]/g, '');
+
+                    document.querySelector('#result').textContent = filteredText + "(" +  result.data.confidence + ")";
+                    if( filteredText.trim().length > 2 && result.data.confidence > 70){
+                        speak(filteredText, "en-US")
                     }
                 });
             }, 500);
