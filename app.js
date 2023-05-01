@@ -74,9 +74,9 @@
                 .then(function(result){
                     // フィルタリング: アルファベット, ピリオド, 感嘆符, 疑問符, スペースのみを含む
                     const filteredText = result.data.text.replace(/[^A-Za-z.!? ]/g, '');
-
+                    console.log(result.data.text + "->" + filteredText)
                     document.querySelector('#result').textContent = filteredText + "(" +  result.data.confidence + ")";
-                    if( filteredText.trim().length > 2 && result.data.confidence > 70){
+                    if( filteredText.length > 2 && result.data.confidence > 70){
                         speak(filteredText, "en-US")
                     }
                 });
